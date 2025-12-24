@@ -218,9 +218,10 @@ export default function Portfolio() {
                       {project.image && (
                         <Image
                           src={project.image}
-                          alt={project.title}
+                          alt={`${project.title} - ${project.category} by Nexo Tech IT`}
                           fill
-                          unoptimized
+                          loading="lazy"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           className="object-contain group-hover:scale-110 transition-transform duration-500"
                         />
                       )}

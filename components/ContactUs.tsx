@@ -1,6 +1,8 @@
+"use client";
 import {
   CheckCircle,
   Clock,
+  Loader2,
   Mail,
   MessageCircle,
   Phone,
@@ -18,6 +20,13 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import FAQStructuredData from "./FAQStructuredData";
+
+const validateEmail = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
 
 export function ContactUs() {
   // const socialLinks = [
@@ -69,8 +78,41 @@ export function ContactUs() {
     },
   ];
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      toast.error("Invalid email address");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      await fetch("/api/sendemail", {
+        method: "POST",
+        body: JSON.stringify({ firstName, lastName, email, phone, message }),
+      });
+      toast.success(
+        "Message sent successfully, you will receive a reply within 2 hours."
+      );
+    } catch (error) {
+      toast.error("Failed to send message");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <FAQStructuredData />
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background to-secondary/20">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl font-bold md:text-5xl mb-6">Get In Touch</h1>
@@ -100,15 +142,27 @@ export function ContactUs() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="firstName">First Name *</Label>
-                        <Input id="firstName" placeholder="John" required />
+                        <Input
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          id="firstName"
+                          placeholder="John"
+                          required
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="lastName">Last Name *</Label>
-                        <Input id="lastName" placeholder="Doe" required />
+                        <Input
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          id="lastName"
+                          placeholder="Doe"
+                          required
+                        />
                       </div>
                     </div>
 
@@ -120,6 +174,8 @@ export function ContactUs() {
                           type="email"
                           placeholder="john@company.com"
                           required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
                       <div className="space-y-2">
@@ -128,6 +184,8 @@ export function ContactUs() {
                           id="phone"
                           type="tel"
                           placeholder="+880 XXXXXXXXXX"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
                         />
                       </div>
                     </div>
@@ -139,12 +197,27 @@ export function ContactUs() {
                         placeholder="Tell us about your project, requirements, and timeline..."
                         className="min-h-[120px]"
                         required
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
                       />
                     </div>
 
-                    <Button type="submit" className="w-full">
-                      Send Message
-                      <Send className="ml-2 h-4 w-4" />
+                    <Button
+                      disabled={isLoading}
+                      type="submit"
+                      className="w-full"
+                    >
+                      {isLoading ? (
+                        <span className="flex items-center gap-2">
+                          {" "}
+                          <Loader2 className="h-4 w-4 animate-spin" />{" "}
+                          Sending...
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-2">
+                          Send Message <Send className="h-4 w-4" />
+                        </span>
+                      )}
                     </Button>
                   </form>
                 </CardContent>

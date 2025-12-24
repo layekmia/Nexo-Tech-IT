@@ -1,0 +1,5 @@
+Contact: mailto:contact@nexotechit.com
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: en, bn
+Canonical: https://nexotechit.com/.well-known/security.txt
+

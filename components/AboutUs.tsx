@@ -163,7 +163,7 @@ export default function AboutUs() {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl group-hover:shadow-primary/20 transition-all duration-300">
               <ImageWithFallback
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                alt="Our team at work"
+                alt="Nexo Tech IT development team working on web development projects"
                 className="rounded-2xl w-full h-auto group-hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -197,7 +197,7 @@ export default function AboutUs() {
                   <div className="relative rounded-full p-1 bg-linear-to-br from-primary/20 to-primary/10">
                     <ImageWithFallback
                       src="/founder.jpg"
-                      alt="Founder of Nexo Tech IT"
+                      alt="Layek Miah - Founder and Full-Stack Web Developer at Nexo Tech IT"
                       className="h-[180px] w-[180px] rounded-full object-cover mx-auto border-4 border-background"
                     />
                   </div>
