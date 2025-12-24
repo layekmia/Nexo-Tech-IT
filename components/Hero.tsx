@@ -1,8 +1,8 @@
 "use client";
 
 import { ArrowRight, Globe, Sparkles, Zap } from "lucide-react";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 
 export default function Hero() {
@@ -14,8 +14,29 @@ export default function Hero() {
     }, 100);
   }, []);
 
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80; // Account for sticky header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <section className="relative py-12 md:py-18  px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section
+      id="home"
+      className="relative py-12 md:py-18  px-4 sm:px-6 lg:px-8 overflow-hidden"
+    >
       {/* Animated Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5 dark:to-primary/10" />
 
@@ -38,7 +59,7 @@ export default function Hero() {
             variant="secondary"
           >
             <Globe className="h-4 w-4 mr-2 animate-spin-slow" />
-            Trusted by 500+ Companies Worldwide
+            Trusted Web Development Agency Worldwide
           </Badge>
         </div>
 
@@ -49,10 +70,10 @@ export default function Hero() {
           }`}
         >
           <span className="block bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-            Transforming Ideas Into
+            We Build High-Converting
           </span>
           <span className="block mt-2 bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
-            Powerful Software Solutions
+            Websites & E-commerce Solutions
           </span>
         </h1>
 
@@ -62,11 +83,11 @@ export default function Hero() {
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          We deliver cutting-edge software development services that drive
-          digital transformation and accelerate business growth. From enterprise
-          applications to{" "}
+          We help businesses grow online by creating fast, SEO-optimized, and
+          conversion-focused websites. From modern landing pages to full-stack
+          e-commerce solutions with{" "}
           <span className="text-primary font-semibold">
-            AI-powered solutions
+            analytics, tracking & automation
           </span>
           .
         </p>
@@ -78,13 +99,18 @@ export default function Hero() {
           }`}
         >
           <Button
+            onClick={(e) => handleSmoothScroll(e, "portfolio")}
             size="lg"
             className="group relative px-8 py-6 text-base font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 overflow-hidden"
           >
-            <span className="relative z-10 flex items-center">
-              Explore Our Solutions
+            <a
+              href="#portfolio"
+              onClick={(e) => handleSmoothScroll(e, "portfolio")}
+              className="relative z-10 flex items-center"
+            >
+              Explore Our Work
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </span>
+            </a>
             <span className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity" />
           </Button>
           <Button
@@ -92,7 +118,14 @@ export default function Hero() {
             variant="outline"
             className="px-8 py-6 text-base font-semibold border-2 hover:bg-accent hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg"
           >
-            Get Free Consultation
+            <a
+              href="#contact"
+              onClick={(e) => handleSmoothScroll(e, "contact")}
+              className="relative z-10 flex items-center"
+            >
+              Get Free Strategy Call
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </a>
           </Button>
         </div>
 

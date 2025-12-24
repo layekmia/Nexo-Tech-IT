@@ -1,365 +1,242 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { 
-  Cloud, 
-  Code, 
-  Smartphone, 
-  Database, 
-  Shield, 
-  BarChart, 
-  CheckCircle, 
+"use client";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  CheckCircle,
+  ShoppingCart,
+  LayoutTemplate,
+  Code2,
   ArrowRight,
-  Zap,
-  Users,
-  Settings
 } from "lucide-react";
+import Container from "./Container";
+import { useEffect, useState } from "react";
 
-export function ProductsServices() {
-  const productCategories = [
-    {
-      id: "saas",
-      title: "SaaS Solutions",
-      icon: <Cloud className="h-6 w-6" />,
-      products: [
-        {
-          name: "Enterprise Resource Planning (ERP)",
-          description: "Comprehensive business management solution for large organizations",
-          image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop",
-          features: ["Multi-tenant architecture", "Real-time analytics", "Custom workflows", "API integrations"],
-          pricing: "Starting at $99/month per user",
-          badge: "Popular"
-        },
-        {
-          name: "Customer Relationship Management (CRM)",
-          description: "Advanced CRM system with AI-powered insights and automation",
-          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
-          features: ["Lead scoring", "Marketing automation", "Sales pipeline", "Customer analytics"],
-          pricing: "Starting at $49/month per user",
-          badge: "New"
-        }
-      ]
-    },
-    {
-      id: "custom",
-      title: "Custom Development",
-      icon: <Code className="h-6 w-6" />,
-      products: [
-        {
-          name: "Web Application Development",
-          description: "Custom web applications built with modern frameworks and technologies",
-          image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=400&h=250&fit=crop",
-          features: ["React/Vue.js frontend", "Node.js/Python backend", "Database design", "Cloud deployment"],
-          pricing: "From $25,000 per project",
-          badge: "Custom"
-        },
-        {
-          name: "Mobile App Development",
-          description: "Native and cross-platform mobile applications for iOS and Android",
-          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop",
-          features: ["React Native/Flutter", "Native iOS/Android", "Backend integration", "App store deployment"],
-          pricing: "From $35,000 per project",
-          badge: "Custom"
-        }
-      ]
-    },
-    {
-      id: "ai",
-      title: "AI & Analytics",
-      icon: <BarChart className="h-6 w-6" />,
-      products: [
-        {
-          name: "Business Intelligence Platform",
-          description: "Advanced analytics and reporting platform with machine learning capabilities",
-          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop",
-          features: ["Real-time dashboards", "Predictive analytics", "Data visualization", "ML models"],
-          pricing: "Starting at $199/month",
-          badge: "AI-Powered"
-        },
-        {
-          name: "Document Processing AI",
-          description: "Automated document analysis and data extraction using computer vision",
-          image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=400&h=250&fit=crop",
-          features: ["OCR technology", "Data extraction", "Workflow automation", "API integration"],
-          pricing: "Pay per document processed",
-          badge: "AI-Powered"
-        }
-      ]
-    }
-  ];
+const services = [
+  {
+    title: "E-commerce Website Development",
+    icon: ShoppingCart,
+    description:
+      "Modern, fast, and secure e-commerce websites that help you sell more online.",
+    features: [
+      "Product management",
+      "Cart & checkout system",
+      "Payment gateway integration",
+      "Mobile-friendly design",
+      "SEO-ready structure",
+    ],
+    cta: "Build My Store",
+    gradient: "from-blue-500/20 to-cyan-500/20",
+    iconGradient: "from-blue-500 to-cyan-500",
+  },
+  {
+    title: "High-Conversion Landing Pages",
+    icon: LayoutTemplate,
+    description:
+      "Landing pages designed to convert visitors into customers and leads.",
+    features: [
+      "Conversion-focused layout",
+      "Fast loading performance",
+      "Mobile-first design",
+      "Clear call-to-action",
+      "Reusable for any product",
+    ],
+    cta: "Get a Landing Page",
+    gradient: "from-purple-500/20 to-pink-500/20",
+    iconGradient: "from-purple-500 to-pink-500",
+  },
+  {
+    title: "Custom Web Applications",
+    icon: Code2,
+    description:
+      "Tailor-made web applications built to solve your specific business problems.",
+    features: [
+      "Custom features & logic",
+      "Scalable architecture",
+      "Modern tech stack",
+      "Secure & optimized",
+      "Future-ready solution",
+    ],
+    cta: "Discuss My Idea",
+    gradient: "from-orange-500/20 to-red-500/20",
+    iconGradient: "from-orange-500 to-red-500",
+  },
+];
 
-  const servicePackages = [
-    {
-      name: "Starter Package",
-      price: "$2,500/month",
-      description: "Perfect for small businesses starting their digital journey",
-      features: [
-        "Basic web application",
-        "Mobile-responsive design",
-        "Database setup",
-        "2 months support",
-        "Basic hosting included"
-      ],
-      popular: false
-    },
-    {
-      name: "Professional Package",
-      price: "$7,500/month",
-      description: "Comprehensive solution for growing businesses",
-      features: [
-        "Full-stack web application",
-        "Mobile app (iOS/Android)",
-        "Advanced database design",
-        "6 months support",
-        "Cloud infrastructure",
-        "Third-party integrations"
-      ],
-      popular: true
-    },
-    {
-      name: "Enterprise Package",
-      price: "Custom pricing",
-      description: "Tailored solutions for large organizations",
-      features: [
-        "Custom enterprise software",
-        "Multi-platform applications",
-        "Advanced security features",
-        "12 months support",
-        "Dedicated team",
-        "Training and documentation"
-      ],
-      popular: false
-    }
-  ];
+export default function ServicesSection() {
+  const [mounted, setMounted] = useState(false);
 
-  const recentUpdates = [
-    {
-      date: "2024-01-15",
-      version: "v2.4.0",
-      title: "Enhanced AI Analytics",
-      description: "Improved machine learning algorithms for better predictions and insights"
-    },
-    {
-      date: "2024-01-08",
-      version: "v2.3.2",
-      title: "Security Updates",
-      description: "Enhanced security measures and compliance features"
-    },
-    {
-      date: "2023-12-20",
-      version: "v2.3.0",
-      title: "Mobile App Improvements",
-      description: "Better performance and new features for mobile applications"
+  useEffect(() => {
+    setTimeout(() => {
+      setMounted(true);
+    }, 100);
+  }, []);
+
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80; // Account for sticky header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
-  ];
+  };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background to-secondary/20">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl mb-6">Products & Services</h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Comprehensive software solutions designed to accelerate your business growth 
-            and digital transformation journey.
+    <section id="services" className="relative py-20 overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute inset-0 bg-linear-to-br from-background via-background to-primary/5" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-size-[24px_24px]" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse opacity-30" />
+      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse opacity-20 delay-1000" />
+
+      <Container className="relative">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2
+            className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-all duration-700 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            <span className="bg-linear-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+              Our Services
+            </span>
+          </h2>
+          <div
+            className={`w-20 h-1 bg-linear-to-r from-primary to-primary/50 rounded-full mx-auto mb-4 transition-all duration-700 delay-100 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          />
+          <p
+            className={`text-muted-foreground max-w-2xl mx-auto text-lg transition-all duration-700 delay-200 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            We offer a wide range of services to help you grow your business
+            online.
           </p>
         </div>
-      </section>
 
-      {/* Product Categories */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <Tabs defaultValue="saas" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
-              {productCategories.map((category) => (
-                <TabsTrigger key={category.id} value={category.id} className="flex items-center gap-2">
-                  {category.icon}
-                  <span className="hidden sm:inline">{category.title}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {services.map((service, index) => {
+            const IconComponent = service.icon;
+            const delay = index * 100;
 
-            {productCategories.map((category) => (
-              <TabsContent key={category.id} value={category.id}>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {category.products.map((product, index) => (
-                    <Card key={index} className="overflow-hidden hover:shadow-xl transition-shadow">
-                      <div className="relative">
-                        <ImageWithFallback
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-48 object-cover"
-                        />
-                        <Badge className="absolute top-4 right-4" variant="secondary">
-                          {product.badge}
-                        </Badge>
-                      </div>
-                      <CardHeader>
-                        <CardTitle>{product.name}</CardTitle>
-                        <CardDescription>{product.description}</CardDescription>
-                        <div className="text-lg text-primary">{product.pricing}</div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-2 mb-4">
-                          {product.features.map((feature, featureIndex) => (
-                            <div key={featureIndex} className="flex items-center gap-2">
-                              <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                              <span className="text-sm">{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="flex gap-2">
-                          <Button className="flex-1">
-                            Learn More
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                          </Button>
-                          <Button variant="outline">Demo</Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </div>
-      </section>
+            return (
+              <Card
+                key={index}
+                className={`
+                  group relative
+                  border border-border/50
+                  bg-card/50 backdrop-blur-sm
+                  shadow-md hover:shadow-2xl
+                  transition-all duration-500 ease-out
+                  hover:-translate-y-2 hover:border-primary/30
+                  overflow-hidden
+                  flex flex-col
+                  ${
+                    mounted
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
+                  }
+                `}
+                style={{
+                  transitionDelay: `${delay}ms`,
+                }}
+              >
+                {/* Gradient overlay on hover */}
+                <div
+                  className={`absolute inset-0 bg-linear-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
+                />
 
-      {/* Service Packages */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-secondary/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="mb-4">Service Packages</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Choose the package that best fits your business needs and budget
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {servicePackages.map((pkg, index) => (
-              <Card key={index} className={`relative ${pkg.popular ? 'ring-2 ring-primary shadow-xl' : ''}`}>
-                {pkg.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2" variant="default">
-                    Most Popular
-                  </Badge>
-                )}
-                <CardHeader className="text-center">
-                  <CardTitle className="text-xl">{pkg.name}</CardTitle>
-                  <div className="text-2xl mb-2">{pkg.price}</div>
-                  <CardDescription>{pkg.description}</CardDescription>
+                {/* Animated border glow */}
+                <div className="absolute inset-0 rounded-xl border-2 border-primary/0 group-hover:border-primary/20 transition-all duration-500 pointer-events-none" />
+
+                <CardHeader className="text-center pb-4 relative z-10">
+                  {/* Icon Container */}
+                  <div
+                    className={`
+                      relative mx-auto mb-6 p-4 rounded-2xl w-fit
+                      bg-linear-to-br ${service.iconGradient}
+                      shadow-lg shadow-primary/20
+                      group-hover:shadow-xl group-hover:shadow-primary/30
+                      group-hover:scale-110
+                      transition-all duration-500
+                      before:absolute before:inset-0 before:rounded-2xl
+                      before:bg-linear-to-br before:from-white/20 before:to-transparent
+                      before:pointer-events-none
+                    `}
+                  >
+                    <IconComponent className="h-8 w-8 text-white relative z-10" />
+                  </div>
+
+                  <CardTitle className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+                    {service.title}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {service.description}
+                  </p>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3 mb-6">
-                    {pkg.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-sm">{feature}</span>
+
+                <CardContent className="flex flex-col flex-1 relative z-10">
+                  {/* Features List */}
+                  <div className="space-y-3 mb-6 flex-1">
+                    {service.features.map((feature, i) => (
+                      <div
+                        key={i}
+                        className="flex items-start gap-3 group/feature"
+                      >
+                        <div className="mt-0.5 p-0.5 rounded-full bg-primary/10 group-hover/feature:bg-primary/20 transition-colors">
+                          <CheckCircle className="h-4 w-4 text-primary" />
+                        </div>
+                        <span className="text-sm text-muted-foreground group-hover/feature:text-foreground transition-colors">
+                          {feature}
+                        </span>
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full" variant={pkg.popular ? "default" : "outline"}>
-                    Get Started
+
+                  {/* CTA Button */}
+                  <Button
+                    className="w-full mt-auto group/btn relative overflow-hidden"
+                    onClick={(e) => {
+                      const anchor = e.currentTarget.querySelector("a");
+                      if (anchor) {
+                        handleSmoothScroll(
+                          e as unknown as React.MouseEvent<HTMLAnchorElement>,
+                          "contact"
+                        );
+                      }
+                    }}
+                  >
+                    <a
+                      href="#contact"
+                      onClick={(e) => handleSmoothScroll(e, "contact")}
+                      className="relative z-10 flex items-center justify-center w-full"
+                    >
+                      {service.cta}
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </a>
+                    <span className="absolute inset-0 bg-linear-to-r from-primary/90 to-primary transition-opacity opacity-0 group-hover/btn:opacity-100" />
                   </Button>
                 </CardContent>
+
+                {/* Decorative corner accent */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-primary/5 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </Card>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      </section>
-
-      {/* Technical Specifications */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="mb-4">Technical Excellence</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Built with cutting-edge technologies and industry best practices
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="text-center">
-              <CardHeader>
-                <Zap className="h-12 w-12 text-primary mx-auto mb-4" />
-                <CardTitle>Performance</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <div>99.9% Uptime SLA</div>
-                  <div>Sub-second response time</div>
-                  <div>Auto-scaling infrastructure</div>
-                  <div>CDN-powered delivery</div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
-                <CardTitle>Security</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <div>End-to-end encryption</div>
-                  <div>SOC 2 Type II compliance</div>
-                  <div>Regular security audits</div>
-                  <div>GDPR compliant</div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <Settings className="h-12 w-12 text-primary mx-auto mb-4" />
-                <CardTitle>Integration</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <div>RESTful APIs</div>
-                  <div>Webhook support</div>
-                  <div>Third-party connectors</div>
-                  <div>Custom integrations</div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Update Log */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-secondary/20">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="mb-4">Recent Updates</h2>
-            <p className="text-muted-foreground">
-              Stay up to date with our latest product improvements and new features
-            </p>
-          </div>
-          
-          <div className="space-y-6">
-            {recentUpdates.map((update, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="text-lg">{update.title}</CardTitle>
-                      <CardDescription>{update.description}</CardDescription>
-                    </div>
-                    <div className="text-right">
-                      <Badge variant="outline">{update.version}</Badge>
-                      <div className="text-sm text-muted-foreground mt-1">
-                        {new Date(update.date).toLocaleDateString()}
-                      </div>
-                    </div>
-                  </div>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
+      </Container>
+    </section>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 
 const Logo = ({
@@ -17,8 +19,30 @@ const Logo = ({
   highlightClassName?: string;
   subtitleClassName?: string;
 }) => {
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80; // Account for sticky header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className={cn("flex items-center gap-3 group", className)}>
+    <a
+      href="#home"
+      onClick={(e) => handleSmoothScroll(e, "home")}
+      className={cn("flex items-center gap-3 group cursor-pointer", className)}
+    >
       {/* Icon with gradient background */}
       <div
         className={cn(
@@ -70,7 +94,7 @@ const Logo = ({
           IT Solutions
         </p>
       </div>
-    </div>
+    </a>
   );
 };
 
