@@ -15,7 +15,7 @@ export default function Hero() {
   }, []);
 
   const handleSmoothScroll = (
-    e: React.MouseEvent<HTMLAnchorElement>,
+    e: React.MouseEvent<HTMLElement>,
     id: string
   ) => {
     e.preventDefault();
@@ -99,7 +99,6 @@ export default function Hero() {
           }`}
         >
           <Button
-            onClick={(e) => handleSmoothScroll(e, "portfolio")}
             size="lg"
             className="group relative px-8 py-6 text-base font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 overflow-hidden"
           >
