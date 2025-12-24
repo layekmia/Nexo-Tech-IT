@@ -103,6 +103,11 @@ export function ContactUs() {
       toast.success(
         "Message sent successfully, you will receive a reply within 2 hours."
       );
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
     } catch (error) {
       toast.error("Failed to send message");
     } finally {
