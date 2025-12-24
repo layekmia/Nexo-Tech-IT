@@ -196,7 +196,7 @@ export default function AboutUs() {
                   <div className="absolute inset-0 bg-linear-to-br from-primary/30 to-primary/10 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
                   <div className="relative rounded-full p-1 bg-linear-to-br from-primary/20 to-primary/10">
                     <ImageWithFallback
-                      src="/founder.jpg"
+                      src="https://i.ibb.co.com/gLdK2Sz5/final.jpg"
                       alt="Layek Miah - Founder and Full-Stack Web Developer at Nexo Tech IT"
                       className="h-[180px] w-[180px] rounded-full object-cover mx-auto border-4 border-background"
                     />
