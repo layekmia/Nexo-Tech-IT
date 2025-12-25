@@ -52,7 +52,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>Email: contact@nexotechit.com</li>
-              <li>WhatsApp: +880 1794700226</li>
+              <li>WhatsApp: +880 1613103990</li>
               <li>Serving Clients Worldwide 🌍</li>
             </ul>
           </div>

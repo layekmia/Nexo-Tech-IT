@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     // 1️⃣ Send email to YOU (Admin)
     await resend.emails.send({
       from: "NexoTech IT <no-reply@nexotechit.com>",
-      to: "contact@nexotechit.com",
+      to: "layekofficial63@gmail.com",
       subject: `New Contact Message — ${firstName} ${lastName}`,
       html: AdminContactEmail({
         firstName,
