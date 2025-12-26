@@ -62,11 +62,27 @@ export default function StructuredData() {
       ratingValue: "4.8",
       reviewCount: "20",
     },
-    priceRange: "$$",
     areaServed: {
       "@type": "Country",
       name: "Worldwide",
     },
+  };
+
+	makesOffer: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Web Development Services",
+          description: "Professional web development services"
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          priceCurrency: "USD",
+          priceRange: "$$" // PriceRange is valid here
+        }
+      }
+    ]
   };
 
   const serviceSchema = {
