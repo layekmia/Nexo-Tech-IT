@@ -8,59 +8,30 @@ import StructuredData from "./structured-data";
 
 export const metadata: Metadata = {
   title: {
-    default: "Nexo Tech IT | Web Development & E-commerce Solutions Agency | Bangladesh",
+    default:
+      "Nexo Tech IT | Web Development & E-commerce Solutions Agency | Bangladesh",
     template: "%s | Nexo Tech IT",
   },
   description:
     "Nexo Tech IT is a leading web development agency in Bangladesh. We specialize in building fast, SEO-optimized websites, high-converting landing pages, and scalable e-commerce platforms using Next.js, React, and modern technologies. 5+ years of expertise. Trusted by businesses worldwide.",
-  
+
   keywords: [
+    "Nexo Tech IT",
     "web development agency",
-    "web development company",
-    "web development services",
-    "custom web development",
-    "e-commerce website development",
-    "e-commerce development agency",
-    "e-commerce website builder",
-    "landing page development",
-    "high converting landing pages",
+    "web design agency",
+    "ecommerce website development",
     "Next.js development",
-    "Next.js development services",
-    "React development",
-    "React development agency",
-    "modern web applications",
-    "full stack web development",
-    "full stack development services",
+    "React web development",
     "SEO optimized websites",
-    "SEO friendly web development",
-    "SEO web development",
-    "performance optimized websites",
-    "fast website development",
     "business website development",
-    "startup website development",
-    "software development agency",
-    "web design and development",
-    "Bangladesh web development agency",
-    "web development agency Bangladesh",
-    "Dhaka web development",
-    "Bangladesh web development company",
-    "global web development services",
-    "affordable web development",
-    "professional web development",
-    "responsive web design",
-    "mobile-friendly websites",
-    "custom web applications",
-    "e-commerce solutions",
-    "online store development",
-    "payment gateway integration",
-    "website maintenance",
-    "web development consultation",
+    "software company Bangladesh",
   ],
+
   metadataBase: new URL("https://nexotechit.com"),
   applicationName: "Nexo Tech IT",
   referrer: "origin-when-cross-origin",
   colorScheme: "light dark",
-  
+
   openGraph: {
     title: "Nexo Tech IT | Professional Web Development & E-commerce Agency",
     description:
@@ -110,7 +81,7 @@ export const metadata: Metadata = {
   creator: "Layek Miah",
   publisher: "Nexo Tech IT",
   category: "Web Development",
-  
+
   verification: {
     // Add your verification codes here when available
     // google: "your-google-verification-code",
@@ -123,7 +94,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  
+
   other: {
     "geo.region": "BD",
     "geo.placename": "Bangladesh",

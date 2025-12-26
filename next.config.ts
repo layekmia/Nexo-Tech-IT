@@ -6,7 +6,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
+        hostname: "**", // Allows all HTTPS hosts
+      },
+      {
+        protocol: "http",
+        hostname: "**", // Allows all HTTP hosts (not recommended for production)
       },
     ],
     formats: ["image/avif", "image/webp"],
@@ -14,14 +18,14 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
   },
-  
+
   // SEO and Performance optimizations
   compress: true,
   poweredByHeader: false,
-  
+
   // Enable React strict mode for better development
   reactStrictMode: true,
-  
+
   // Headers for security and performance
   async headers() {
     return [

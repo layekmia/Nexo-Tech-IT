@@ -1,27 +1,30 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "./ui/button";
 import Logo from "./Logo";
 import Container from "./Container";
 import { Menu, X } from "lucide-react";
 
+type NavItem =
+  | { id: string; label: string; type: "anchor" }
+  | { id: string; label: string; type: "link"; href: string };
+
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = [
-    { id: "home", label: "Home" },
-    { id: "services", label: "Services" },
-    { id: "whychooseus", label: "Why Us" },
-    { id: "portfolio", label: "Portfolio" },
-    { id: "about", label: "About Us" },
-    { id: "contact", label: "Contact Us" },
+  const navItems: NavItem[] = [
+    { id: "home", label: "Home", type: "anchor" },
+    { id: "services", label: "Services", type: "anchor" },
+    { id: "whychooseus", label: "Why Us", type: "anchor" },
+    { id: "portfolio", label: "Portfolio", type: "anchor" },
+    { id: "about", label: "About Us", type: "anchor" },
+    { id: "blog", label: "Blogs", type: "link", href: "/blog" },
+    { id: "contact", label: "Contact Us", type: "anchor" },
   ];
 
-  const handleSmoothScroll = (
-    e: React.MouseEvent<HTMLElement>,
-    id: string
-  ) => {
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLElement>, id: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false); // Close mobile menu on link click
     const element = document.getElementById(id);
@@ -39,7 +42,7 @@ export function Navigation() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-border shadow-sm">
+      <nav className="sticky top-0 md:py-1.5 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-border shadow-sm">
         <Container>
           <div className="flex justify-between items-center h-16">
             <div className="shrink-0">
@@ -49,16 +52,30 @@ export function Navigation() {
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                {navItems.map((item) => (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    onClick={(e) => handleSmoothScroll(e, item.id)}
-                    className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
-                  >
-                    {item.label}
-                  </a>
-                ))}
+                {navItems.map((item) => {
+                  if (item.type === "link") {
+                    return (
+                      <Link
+                        key={item.id}
+                        href={item.href || "/"}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="px-3 py-2 text-base font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  }
+                  return (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      onClick={(e) => handleSmoothScroll(e, item.id)}
+                      className="px-3 py-2 text-base font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+                    >
+                      {item.label}
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
@@ -122,29 +139,64 @@ export function Navigation() {
 
           {/* Menu Items */}
           <nav className="flex flex-col p-4 space-y-2">
-            {navItems.map((item, index) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={(e) => handleSmoothScroll(e, item.id)}
-                className={`
-                  px-4 py-3 rounded-lg
-                  text-base font-medium
-                  text-foreground
-                  hover:bg-primary/10 hover:text-primary
-                  active:bg-primary/20
-                  transition-all duration-200
-                  cursor-pointer
-                  transform
-                  ${isMobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"}
-                `}
-                style={{
-                  transitionDelay: `${index * 50}ms`,
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item, index) => {
+              if (item.type === "link") {
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href || "/"}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`
+                      px-4 py-3 rounded-lg
+                      text-base font-medium
+                      text-foreground
+                      hover:bg-primary/10 hover:text-primary
+                      active:bg-primary/20
+                      transition-all duration-200
+                      cursor-pointer
+                      transform
+                      ${
+                        isMobileMenuOpen
+                          ? "translate-x-0 opacity-100"
+                          : "translate-x-4 opacity-0"
+                      }
+                    `}
+                    style={{
+                      transitionDelay: `${index * 50}ms`,
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleSmoothScroll(e, item.id)}
+                  className={`
+                    px-4 py-3 rounded-lg
+                    text-base font-medium
+                    text-foreground
+                    hover:bg-primary/10 hover:text-primary
+                    active:bg-primary/20
+                    transition-all duration-200
+                    cursor-pointer
+                    transform
+                    ${
+                      isMobileMenuOpen
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-4 opacity-0"
+                    }
+                  `}
+                  style={{
+                    transitionDelay: `${index * 50}ms`,
+                  }}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </nav>
         </div>
       </div>

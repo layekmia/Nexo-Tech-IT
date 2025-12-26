@@ -43,7 +43,7 @@ export default function StructuredData() {
       // "https://www.linkedin.com/company/nexotechit",
       // "https://github.com/nexotechit",
       // "https://twitter.com/nexotechit",
-      // "https://www.facebook.com/nexotechit",
+      "https://web.facebook.com/NexoTechIT/",
     ],
     knowsAbout: [
       "Web Development",
