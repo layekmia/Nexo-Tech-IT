@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Logo from "./Logo";
@@ -13,6 +14,8 @@ type NavItem =
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const navItems: NavItem[] = [
     { id: "home", label: "Home", type: "anchor" },
@@ -27,6 +30,16 @@ export function Navigation() {
   const handleSmoothScroll = (e: React.MouseEvent<HTMLElement>, id: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false); // Close mobile menu on link click
+
+    // If we're not on the home page, navigate to home first
+    if (pathname !== "/") {
+      router.push(`/#${id}`);
+      // Store the target ID to scroll to after navigation
+      sessionStorage.setItem("scrollTo", id);
+      return;
+    }
+
+    // If we're already on home page, just scroll
     const element = document.getElementById(id);
     if (element) {
       const offset = 80; // Account for sticky header height
@@ -66,14 +79,14 @@ export function Navigation() {
                     );
                   }
                   return (
-                    <a
+                    <Link
                       key={item.id}
-                      href={`#${item.id}`}
+                      href={pathname === "/" ? `#${item.id}` : `/#${item.id}`}
                       onClick={(e) => handleSmoothScroll(e, item.id)}
                       className="px-3 py-2 text-base font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   );
                 })}
               </div>
@@ -170,9 +183,9 @@ export function Navigation() {
                 );
               }
               return (
-                <a
+                <Link
                   key={item.id}
-                  href={`#${item.id}`}
+                  href={pathname === "/" ? `#${item.id}` : `/#${item.id}`}
                   onClick={(e) => handleSmoothScroll(e, item.id)}
                   className={`
                     px-4 py-3 rounded-lg
@@ -194,7 +207,7 @@ export function Navigation() {
                   }}
                 >
                   {item.label}
-                </a>
+                </Link>
               );
             })}
           </nav>

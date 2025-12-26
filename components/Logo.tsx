@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const Logo = ({
@@ -19,11 +20,24 @@ const Logo = ({
   highlightClassName?: string;
   subtitleClassName?: string;
 }) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
   const handleSmoothScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
     id: string
   ) => {
     e.preventDefault();
+
+    // If we're not on the home page, navigate to home first
+    if (pathname !== "/") {
+      router.push(`/#${id}`);
+      // Store the target ID to scroll to after navigation
+      sessionStorage.setItem("scrollTo", id);
+      return;
+    }
+
+    // If we're already on home page, just scroll
     const element = document.getElementById(id);
     if (element) {
       const offset = 80; // Account for sticky header height
@@ -39,7 +53,7 @@ const Logo = ({
 
   return (
     <a
-      href="#home"
+      href={pathname === "/" ? "#home" : "/#home"}
       onClick={(e) => handleSmoothScroll(e, "home")}
       className={cn("flex items-center gap-3 group cursor-pointer", className)}
     >

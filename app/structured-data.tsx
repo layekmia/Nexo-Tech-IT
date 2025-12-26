@@ -67,24 +67,6 @@ export default function StructuredData() {
       name: "Worldwide",
     },
   };
-
-	makesOffer: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Web Development Services",
-          description: "Professional web development services"
-        },
-        priceSpecification: {
-          "@type": "PriceSpecification",
-          priceCurrency: "USD",
-          priceRange: "$$" // PriceRange is valid here
-        }
-      }
-    ]
-  };
-
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
