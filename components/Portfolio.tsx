@@ -52,7 +52,7 @@ const projects: Project[] = [
       "Tailwindcss",
     ],
     image: "/shopco.png",
-    liveUrl: "shopco.nexotechit.com",
+    liveUrl: "https://shopco.nexotechit.com/",
     category: "Web Application",
   },
   {
