@@ -1,7 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Phone, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 
 type FormState = "idle" | "loading" | "success" | "error";
@@ -32,7 +40,9 @@ export default function ContactPage() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -52,7 +62,9 @@ export default function ContactPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
+        throw new Error(
+          data.error || "Something went wrong. Please try again.",
+        );
       }
 
       setFormState("success");
@@ -60,7 +72,9 @@ export default function ContactPage() {
     } catch (err: unknown) {
       setFormState("error");
       setErrorMessage(
-        err instanceof Error ? err.message : "Something went wrong. Please try again."
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.",
       );
     }
   };
@@ -74,7 +88,6 @@ export default function ContactPage() {
     <div className="pt-32 pb-20 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-
           {/* Left Column */}
           <div>
             <Reveal>
@@ -82,8 +95,9 @@ export default function ContactPage() {
                 Let's Solve Your Business Headaches
               </h1>
               <p className="text-lg text-slate-600 mb-10 leading-relaxed">
-                Whether you need to automate your Facebook orders, manage your school, or launch
-                an online store, we are here to help. Tell us what you need, in plain English.
+                Whether you need to automate your Facebook orders, manage your
+                school, or launch an online store, we are here to help. Tell us
+                what you need, in plain English.
               </p>
 
               <div className="space-y-6 mb-12">
@@ -92,7 +106,9 @@ export default function ContactPage() {
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900">WhatsApp / Phone</h4>
+                    <h4 className="font-bold text-slate-900">
+                      WhatsApp / Phone
+                    </h4>
                     <a
                       href="https://wa.me/8801613103990"
                       target="_blank"
@@ -123,27 +139,36 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-900">Location</h4>
-                    <p className="text-slate-600">Based in Sylhet, Bangladesh. Helping businesses everywhere.</p>
+                    <p className="text-slate-600">
+                      Based in Sylhet, Bangladesh. Helping businesses
+                      everywhere.
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* WhatsApp CTA */}
               <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm text-center">
-                <div className="w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-[#EEF4FF] text-[#3883F0] rounded-full flex items-center justify-center mx-auto mb-4">
                   <Phone className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Prefer a Quick Chat?</h3>
+
+                <h3 className="text-xl font-bold text-slate-900 mb-2">
+                  Prefer a Quick Chat?
+                </h3>
+
                 <p className="text-slate-500 text-sm mb-6">
-                  Message us on WhatsApp for a fast, friendly response — usually within minutes.
+                  Message us on WhatsApp for a fast, professional response —
+                  usually within minutes.
                 </p>
+
                 <a
                   href="https://wa.me/8801613103990?text=Hi%2C%20I%20found%20your%20website%20and%20I%27d%20like%20to%20discuss%20a%20project."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-500 text-white px-8 py-3 rounded-full font-medium w-full block hover:bg-green-600 transition-colors"
+                  className="bg-[#3883F0] text-white px-8 py-3 rounded-full font-medium w-full block hover:bg-[#2F6FD6] transition-colors"
                 >
-                  Open WhatsApp
+                  Start Conversation
                 </a>
               </div>
             </Reveal>
@@ -152,29 +177,32 @@ export default function ContactPage() {
           {/* Right Column — Form */}
           <Reveal direction="left">
             <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200 shadow-xl">
-              <h3 className="text-2xl font-bold text-slate-900 mb-8">Send us a message</h3>
+              <h3 className="text-2xl font-bold text-slate-900 mb-8">
+                Send us a message
+              </h3>
 
               {/* Success State */}
               {formState === "success" ? (
-                <div className="bg-green-50 text-green-700 p-8 rounded-2xl flex flex-col items-center text-center">
-                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-5">
-                    <CheckCircle className="w-10 h-10 text-green-500" />
-                  </div>
-                  <h4 className="text-2xl font-bold mb-2">Message Sent! 🎉</h4>
-                  <p className="text-green-600 mb-6 leading-relaxed">
-                    Thank you for reaching out! We've also sent a confirmation to your email.
-                    We'll get back to you within 1–2 business hours.
+                <div className="bg-[#EEF4FF] text-[#1E3A8A] p-8 rounded-2xl text-center max-w-lg mx-auto">
+                  <h4 className="text-2xl font-semibold mb-3">
+                    Your message has been sent successfully
+                  </h4>
+
+                  <p className="text-[#2F5FB3] mb-6 leading-relaxed">
+                    Thank you for contacting us. We’ve received your message and
+                    sent a confirmation to your email address. Our team will
+                    review your inquiry and respond within 1–2 business hours.
                   </p>
+
                   <button
                     onClick={() => setFormState("idle")}
-                    className="bg-green-600 text-white px-8 py-3 rounded-full font-medium hover:bg-green-700 transition-colors"
+                    className="bg-[#3883F0] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#2F6FD6] transition-colors"
                   >
-                    Send Another Message
+                    Send another message
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-
                   {/* Error Banner */}
                   {formState === "error" && (
                     <div className="bg-red-50 text-red-700 px-4 py-3 rounded-xl flex items-center gap-3">
@@ -185,7 +213,10 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-semibold text-slate-700">
+                      <label
+                        htmlFor="name"
+                        className="text-sm font-semibold text-slate-700"
+                      >
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -201,7 +232,10 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-semibold text-slate-700">
+                      <label
+                        htmlFor="email"
+                        className="text-sm font-semibold text-slate-700"
+                      >
                         Email Address <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -220,7 +254,10 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="business" className="text-sm font-semibold text-slate-700">
+                      <label
+                        htmlFor="business"
+                        className="text-sm font-semibold text-slate-700"
+                      >
                         Business / Shop Name
                       </label>
                       <input
@@ -235,7 +272,10 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="phone" className="text-sm font-semibold text-slate-700">
+                      <label
+                        htmlFor="phone"
+                        className="text-sm font-semibold text-slate-700"
+                      >
                         WhatsApp / Phone
                       </label>
                       <input
@@ -253,7 +293,10 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="service" className="text-sm font-semibold text-slate-700">
+                      <label
+                        htmlFor="service"
+                        className="text-sm font-semibold text-slate-700"
+                      >
                         How can we help?
                       </label>
                       <select
@@ -274,7 +317,10 @@ export default function ContactPage() {
                       </select>
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="timeline" className="text-sm font-semibold text-slate-700">
+                      <label
+                        htmlFor="timeline"
+                        className="text-sm font-semibold text-slate-700"
+                      >
                         Project Timeline
                       </label>
                       <select
@@ -294,8 +340,12 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-semibold text-slate-700">
-                      Tell us about your business <span className="text-red-500">*</span>
+                    <label
+                      htmlFor="message"
+                      className="text-sm font-semibold text-slate-700"
+                    >
+                      Tell us about your business{" "}
+                      <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       id="message"
@@ -334,7 +384,6 @@ export default function ContactPage() {
               )}
             </div>
           </Reveal>
-
         </div>
       </div>
     </div>

@@ -32,110 +32,121 @@ export async function POST(request: NextRequest) {
       from: process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev",
       to: process.env.CONTACT_RECEIVER_EMAIL || "contact@nexotechit.com",
       replyTo: email, // 💡 Crucial: This lets you click "Reply" in your email client to respond to the customer directly.
-      subject: `🚀 New Enquiry from ${name} — ${service || "General"}`,
+      subject: `New Business Enquiry from ${name}`,
       html: `
-        <!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>New Contact Form Submission</title>
-          </head>
-          <body style="margin:0;padding:0;background-color:#f1f5f9;font-family:'Segoe UI',Roboto,sans-serif;">
-            <table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f9;padding:40px 20px;">
-              <tr>
-                <td align="center">
-                  <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-                    
-                    <!-- Header -->
-                    <tr>
-                      <td style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:32px 40px;text-align:center;">
-                        <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;letter-spacing:-0.5px;">
-                          🚀 New Contact Form Submission
-                        </h1>
-                        <p style="margin:8px 0 0;color:#bfdbfe;font-size:14px;">Nexo Tech IT — nexotechit.com</p>
-                      </td>
-                    </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Enquiry</title>
+</head>
 
-                    <!-- Body -->
-                    <tr>
-                      <td style="padding:32px 40px;">
-                        <table width="100%" cellpadding="0" cellspacing="0">
-                          
-                          <tr>
-                            <td style="padding-bottom:24px;">
-                              <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Full Name</p>
-                              <p style="margin:0;font-size:16px;color:#0f172a;font-weight:600;">${name}</p>
-                            </td>
-                          </tr>
-                          
-                          <tr>
-                            <td style="padding-bottom:24px;">
-                              <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Email Address</p>
-                              <p style="margin:0;font-size:16px;color:#3b82f6;">${email}</p>
-                            </td>
-                          </tr>
+<body style="margin:0;padding:0;background:#f1f5f9;font-family:Inter,Segoe UI,Roboto,sans-serif;">
 
-                          ${business ? `
-                          <tr>
-                            <td style="padding-bottom:24px;">
-                              <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Business / Shop</p>
-                              <p style="margin:0;font-size:16px;color:#0f172a;">${business}</p>
-                            </td>
-                          </tr>` : ""}
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 20px;">
+    <tr>
+      <td align="center">
 
-                          ${phone ? `
-                          <tr>
-                            <td style="padding-bottom:24px;">
-                              <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">WhatsApp / Phone</p>
-                              <p style="margin:0;font-size:16px;color:#0f172a;">${phone}</p>
-                            </td>
-                          </tr>` : ""}
+        <!-- Container -->
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;">
 
-                          <tr>
-                            <td style="padding-bottom:24px;">
-                              <table width="100%" cellpadding="0" cellspacing="0">
-                                <tr>
-                                  <td width="48%" style="padding-right:8px;">
-                                    <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Service Needed</p>
-                                    <p style="margin:0;font-size:15px;color:#0f172a;">${service || "Not specified"}</p>
-                                  </td>
-                                  <td width="48%" style="padding-left:8px;">
-                                    <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Timeline</p>
-                                    <p style="margin:0;font-size:15px;color:#0f172a;">${timeline || "Not specified"}</p>
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
+          <!-- Header -->
+          <tr>
+            <td style="background:#3883F0;padding:24px 32px;">
+              <h2 style="margin:0;color:#ffffff;font-size:18px;font-weight:600;">
+                New Client Enquiry
+              </h2>
+              <p style="margin:6px 0 0;color:#dbeafe;font-size:13px;">
+                Nexotech IT • nexotechit.com
+              </p>
+            </td>
+          </tr>
 
-                          <tr>
-                            <td>
-                              <p style="margin:0 0 8px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Their Message</p>
-                              <div style="background:#f8fafc;border-left:4px solid #3b82f6;border-radius:8px;padding:16px 20px;">
-                                <p style="margin:0;font-size:15px;color:#334155;line-height:1.7;">${message.replace(/\n/g, "<br/>")}</p>
-                              </div>
-                            </td>
-                          </tr>
+          <!-- Body -->
+          <tr>
+            <td style="padding:32px;">
 
-                        </table>
-                      </td>
-                    </tr>
+              <!-- Info Table -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
 
-                    <!-- Footer -->
-                    <tr>
-                      <td style="background:#f8fafc;padding:20px 40px;text-align:center;border-top:1px solid #e2e8f0;">
-                        <p style="margin:0;font-size:12px;color:#94a3b8;">Nexo Tech IT · Sylhet, Bangladesh · nexotechit.com</p>
-                      </td>
-                    </tr>
+                <tr>
+                  <td style="padding-bottom:16px;">
+                    <strong style="display:block;font-size:12px;color:#64748b;">FULL NAME</strong>
+                    <span style="font-size:15px;color:#0f172a;">${name}</span>
+                  </td>
+                </tr>
 
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </body>
-        </html>
-      `,
+                <tr>
+                  <td style="padding-bottom:16px;">
+                    <strong style="display:block;font-size:12px;color:#64748b;">EMAIL</strong>
+                    <span style="font-size:15px;color:#3883F0;">${email}</span>
+                  </td>
+                </tr>
+
+                ${phone ? `
+                <tr>
+                  <td style="padding-bottom:16px;">
+                    <strong style="display:block;font-size:12px;color:#64748b;">PHONE</strong>
+                    <span style="font-size:15px;color:#0f172a;">${phone}</span>
+                  </td>
+                </tr>` : ""}
+
+                ${business ? `
+                <tr>
+                  <td style="padding-bottom:16px;">
+                    <strong style="display:block;font-size:12px;color:#64748b;">BUSINESS</strong>
+                    <span style="font-size:15px;color:#0f172a;">${business}</span>
+                  </td>
+                </tr>` : ""}
+
+              </table>
+
+              <!-- Service + Timeline -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+                <tr>
+                  <td width="50%" style="padding-right:8px;">
+                    <strong style="display:block;font-size:12px;color:#64748b;">SERVICE</strong>
+                    <span style="font-size:14px;color:#0f172a;">${service || "Not specified"}</span>
+                  </td>
+                  <td width="50%" style="padding-left:8px;">
+                    <strong style="display:block;font-size:12px;color:#64748b;">TIMELINE</strong>
+                    <span style="font-size:14px;color:#0f172a;">${timeline || "Not specified"}</span>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Message -->
+              <div style="border:1px solid #e2e8f0;border-radius:10px;padding:16px;background:#f8fafc;">
+                <strong style="display:block;font-size:12px;color:#64748b;margin-bottom:6px;">
+                  MESSAGE
+                </strong>
+                <p style="margin:0;font-size:14px;color:#334155;line-height:1.6;">
+                  ${message.replace(/\n/g, "<br/>")}
+                </p>
+              </div>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 32px;background:#f8fafc;border-top:1px solid #e2e8f0;text-align:center;">
+              <p style="margin:0;font-size:12px;color:#94a3b8;">
+                Nexotech IT · Sylhet, Bangladesh
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+`,
     });
 
     // Handle Resend API errors
