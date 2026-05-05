@@ -75,14 +75,14 @@ export const productsData: Product[] = [
   {
     id: "natours",
     logoText: "natours",
-    logoIconColor: "bg-[#f59e0b]", // amber
+    logoIconColor: "bg-[#10b981]", // emerald
     title: "Travel & Tour Booking Engine",
     description: "Allow customers to discover exciting travel packages, book their trips online, and manage their itineraries seamlessly.",
     link: "https://natours.nexotechit.com/",
     image: "/products/natours.png", // Placeholder
-    bgColor: "bg-[#fef3c7]",
-    btnColor: "bg-[#f59e0b]",
-    btnHoverColor: "hover:bg-[#d97706]",
+    bgColor: "bg-[#dcfce7]",
+    btnColor: "bg-[#10b981]",
+    btnHoverColor: "hover:bg-[#059669]",
   }
 
 ];
