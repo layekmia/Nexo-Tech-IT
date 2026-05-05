@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Zap, Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const productLinks = [
@@ -56,11 +57,21 @@ export default function Navbar() {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }
           }}
-          className="flex items-center gap-3 group"
+          className="flex items-center gap-1 group"
         >
-          <div className="text-primary group-hover:scale-105 transition-transform">
-            {/* Custom Appifylab-like logo icon or default Zap */}
-            <Zap className="w-8 h-8 fill-primary" />
+          <div className="group-hover:scale-105 transition-transform">
+            <Image
+              src="/web_logo.png"
+              alt="NexoTechIT Logo"
+              width={44}
+              height={44}
+              className="object-contain"
+              style={{
+                filter:
+                  "brightness(0) saturate(100%) invert(19%) sepia(96%) saturate(1800%) hue-rotate(214deg) brightness(95%)",
+              }}
+              priority
+            />
           </div>
           <div className="flex flex-col">
             <span className="text-xl font-black tracking-tight text-slate-950 leading-none">

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Zap, Globe, MessageSquare, Share2, Mail } from "lucide-react";
+import Image from "next/image";
+import { Globe, MessageSquare, Share2, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -12,8 +13,18 @@ export default function Footer() {
           {/* Column 1 - Brand */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2">
-              <div className="bg-blue-500/20 text-blue-400 p-2 rounded-lg border border-blue-500/30">
-                <Zap className="w-5 h-5" />
+              <div>
+                <Image
+                  src="/web_logo.png"
+                  alt="NexoTechIT Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                  style={{
+                    filter:
+                      "brightness(0) saturate(100%) invert(19%) sepia(96%) saturate(1800%) hue-rotate(214deg) brightness(95%)",
+                  }}
+                />
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
                 Nexo Tech IT
