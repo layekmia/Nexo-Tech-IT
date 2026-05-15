@@ -30,7 +30,7 @@ export const productsData: Product[] = [
     logoIconColor: "bg-[#6366f1]", // indigo
     title: "Smart Inventory & POS System",
     description: "Automate your stock management, track multi-warehouse inventory, and handle retail checkout smoothly with our POS integration.",
-    link: "https://smartsolutation2.vercel.app/",
+    link: "https://softora.nexotechit.com/",
     image: "/products/softora.png", // Placeholder
     bgColor: "bg-[#e0e7ff]",
     btnColor: "bg-[#6366f1]",
