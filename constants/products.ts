@@ -25,12 +25,12 @@ export const productsData: Product[] = [
     btnHoverColor: "hover:bg-[#059669]",
   },
   {
-    id: "softora",
-    logoText: "softora",
+    id: "smartbebsha",
+    logoText: "smartbebsha",
     logoIconColor: "bg-[#6366f1]", // indigo
     title: "Smart Inventory & POS System",
     description: "Automate your stock management, track multi-warehouse inventory, and handle retail checkout smoothly with our POS integration.",
-    link: "https://softora.nexotechit.com/",
+    link: "https://smartbebsha.nexotechit.com/",
     image: "/products/softora.png", // Placeholder
     bgColor: "bg-[#e0e7ff]",
     btnColor: "bg-[#6366f1]",
