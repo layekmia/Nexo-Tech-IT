@@ -21,10 +21,11 @@ const productLinks = [
 
 const navLinks = [
   { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
   { name: "Products", href: "#", hasDropdown: true },
   { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
   { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
