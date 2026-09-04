@@ -1,6 +1,29 @@
+import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
 import FAQ from "@/components/home/FAQ";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "About Us — Our Story, Mission & Team",
+  description:
+    "Learn about Nexo Tech IT — a software development company helping businesses worldwide build custom software and deploy ready-made SaaS products. Meet our founders and team.",
+  keywords: [
+    "Nexo Tech IT about",
+    "software development company story",
+    "IT company team",
+    "custom software company founders",
+  ],
+  alternates: {
+    canonical: "https://nexotechit.com/about",
+  },
+  openGraph: {
+    title: "About Nexo Tech IT — Our Story, Mission & Team",
+    description:
+      "We are a software development company that helps businesses globally build better digital products. Learn our story.",
+    url: "https://nexotechit.com/about",
+  },
+};
+
 
 const founders = [
   {

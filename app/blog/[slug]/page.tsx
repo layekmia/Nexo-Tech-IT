@@ -1,13 +1,59 @@
+import type { Metadata } from "next";
 import { blogsData } from "@/constants/blogs";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { ArrowLeft, Calendar, Clock, ChevronRight } from "lucide-react";
 
 export async function generateStaticParams() {
   return blogsData.map((post) => ({
     slug: post.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = blogsData.find((p) => p.slug === slug);
+
+  if (!post) {
+    return { title: "Post Not Found" };
+  }
+
+  return {
+    title: post.title,
+    description: post.desc,
+    authors: [{ name: post.author ?? "Nexo Tech IT Team" }],
+    alternates: {
+      canonical: `https://nexotechit.com/blog/${post.slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.desc,
+      url: `https://nexotechit.com/blog/${post.slug}`,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author ?? "Nexo Tech IT Team"],
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.desc,
+      images: [post.image],
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -18,8 +64,41 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post!.title,
+    description: post!.desc,
+    image: post!.image,
+    datePublished: post!.date,
+    author: {
+      "@type": "Organization",
+      name: post!.author ?? "Nexo Tech IT Team",
+      url: "https://nexotechit.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Nexo Tech IT",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://nexotechit.com/logo.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://nexotechit.com/blog/${post!.slug}`,
+    },
+  };
+
   return (
-    <article className="pt-32 pb-24 bg-white min-h-screen">
+    <>
+      <Script
+        id="article-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        strategy="afterInteractive"
+      />
+      <article className="pt-32 pb-24 bg-white min-h-screen">
       <div className="container mx-auto px-4 md:px-8 max-w-4xl">
         
         {/* Breadcrumb & Back Link */}
@@ -63,11 +142,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <div className="relative w-full aspect-[21/9] md:aspect-[2.5/1] rounded-3xl overflow-hidden shadow-2xl border border-slate-100">
           <Image 
             src={post.image} 
-            alt={post.title} 
+            alt={`${post.title} - Nexo Tech IT Blog`} 
             fill 
+            sizes="100vw"
             className="object-cover" 
             priority
-            unoptimized
           />
         </div>
       </div>
@@ -86,8 +165,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               N
             </div>
             <div>
-              <div className="font-bold text-slate-900">Nexo Tech IT Team</div>
-              <div className="text-sm text-slate-500">Expert Software Engineers</div>
+              <div className="font-bold text-slate-900">{post.author ?? "Nexo Tech IT Team"}</div>
+              <div className="text-sm text-slate-500">{post.authorRole ?? "Software Development Experts"}</div>
             </div>
           </div>
           <Link 
@@ -99,5 +178,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
       </div>
     </article>
+    </>
   );
 }

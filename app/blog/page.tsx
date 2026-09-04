@@ -1,8 +1,24 @@
+import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { blogsData } from "@/constants/blogs";
+
+export const metadata: Metadata = {
+  title: "Blog — Software Development Insights & Industry Guides",
+  description:
+    "Expert guides and insights on custom software development, LMS platforms, e-commerce, POS systems, and IT consulting. Written by the Nexo Tech IT team.",
+  keywords: ["software development blog", "IT consulting articles", "custom software guides", "LMS insights", "ecommerce development tips"],
+  alternates: {
+    canonical: "https://nexotechit.com/blog",
+  },
+  openGraph: {
+    title: "Blog — Software Development Insights | Nexo Tech IT",
+    description: "Expert articles on custom software, SaaS, e-commerce, LMS, POS, and IT consulting from the Nexo Tech IT team.",
+    url: "https://nexotechit.com/blog",
+  },
+};
 
 export default function BlogPage() {
   return (
@@ -26,8 +42,9 @@ export default function BlogPage() {
                 <Link href={`/blog/${post.slug}`} className="aspect-[16/9] bg-slate-100 block relative overflow-hidden">
                   <Image 
                     src={post.image} 
-                    alt={post.title} 
+                    alt={`${post.title} - Nexo Tech IT Blog`} 
                     fill 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500" 
                     unoptimized
                   />
